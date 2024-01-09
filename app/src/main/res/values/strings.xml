@@ -1,0 +1,25 @@
+<resources>
+    <string name="app_name">Data Barang</string>
+    <string name="entry_data">Tambah Data</string>
+    <string name="deskripsi_no_item">Tidak ada data Barang. Tap + untuk menambah data</string>
+    <string name="nama">Nama Barang</string>
+    <string name="kode">Kode Barang</string>
+    <string name="jumlah">Jumlah Barang</string>
+    <string name="harga">Harga Barang</string>
+    <string name="nama1">Nama Siswa  :</string>
+    <string name="alamat1">Alamat Siswa :</string>
+    <string name="telpon1">Telpon Siswa :</string>
+    <string name="required_field">* required fields</string>
+    <string name="btn_submit">Submit</string>
+    <string name="detail_barang">Detail Barang</string>
+    <string name="edit_barang">Edit Barang</string>
+    <string name="back">Back</string>
+    <string name="yes">Ya</string>
+    <string name="no">Tidak</string>
+    <string name="delete">Hapus</string>
+    <string name="update">Edit</string>
+    <string name="attention">Perhatian</string>
+    <string name="tanya">Apakah anda yakin menghapus ini ?</string>
+    <string name="Next">Get Started</string>
+
+</resources>
