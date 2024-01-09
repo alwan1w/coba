@@ -11,6 +11,7 @@ import androidx.compose.material3.TopAppBarScrollBehavior
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.res.stringResource
+import androidx.lifecycle.viewmodel.compose.viewModel
 import androidx.navigation.NavHostController
 import androidx.navigation.NavType
 import androidx.navigation.compose.NavHost
@@ -18,11 +19,16 @@ import androidx.navigation.compose.composable
 import androidx.navigation.compose.rememberNavController
 import androidx.navigation.navArgument
 import com.example.roomsiswa.R
+import com.example.roomsiswa.login.AuthViewModel
+import com.example.roomsiswa.login.DestinasiHalamanLogin
+import com.example.roomsiswa.login.HalamanLogin
 import com.example.roomsiswa.ui.halaman.DestinasiEntry
+import com.example.roomsiswa.ui.halaman.DestinasiHalamanAwal
 import com.example.roomsiswa.ui.halaman.DestinasiHome
 import com.example.roomsiswa.ui.halaman.DetailsDestination
 import com.example.roomsiswa.ui.halaman.DetailsScreen
 import com.example.roomsiswa.ui.halaman.EntryBarangScreen
+import com.example.roomsiswa.ui.halaman.HalamanAwal
 import com.example.roomsiswa.ui.halaman.HomeScreen
 import com.example.roomsiswa.ui.halaman.ItemEditDestination
 import com.example.roomsiswa.ui.halaman.ItemEditScreen
@@ -60,14 +66,34 @@ fun BarangTopAppBar(
 @Composable
 fun HostNavigasi(
     navController: NavHostController,
-    modifier: Modifier = Modifier
+    modifier: Modifier = Modifier,
+    authViewModel: AuthViewModel = viewModel()
 ) {
     NavHost(
         navController = navController,
-        startDestination = DestinasiHome.route,
+        startDestination = DestinasiHalamanAwal.route,
         modifier = Modifier
     )
     {
+
+        composable(DestinasiHalamanAwal.route) {
+            HalamanAwal(
+                onNextButtonClicked = {
+                    navController.navigate(DestinasiHalamanLogin.route)
+                })
+        }
+
+        composable(DestinasiHalamanLogin.route) {
+            HalamanLogin(
+                onLoginButtonClicked = { username, password ->
+                    if (authViewModel.authenticate(username, password)) {
+                        navController.navigate(DestinasiHome.route)
+                    } else {
+
+                    }
+                }
+            )}
+
         composable(DestinasiHome.route) {
             HomeScreen(
                 navigateToItemEntry = { navController.navigate(DestinasiEntry.route) },
