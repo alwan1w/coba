@@ -51,6 +51,8 @@ data class DetailBarang(
     val kode : String = "",
     val jumlah: String = "",
     val harga : String = "",
+    val tanggal: String = "",
+
 )
 /* Fungsi untuk mengkonversi data input ke data dalam tabel sesuai jenis datanya*/
 fun DetailBarang.toBarang(): Barang = Barang(
@@ -58,7 +60,8 @@ fun DetailBarang.toBarang(): Barang = Barang(
     nama = nama,
     kode = kode,
     jumlah = jumlah,
-    harga = harga
+    harga = harga,
+    tanggal = tanggal
 )
 
 fun Barang.toUiStateBarang(isEntryValid: Boolean = false): UIStateBarang = UIStateBarang(
@@ -71,5 +74,6 @@ fun Barang.toDetailBarang(): DetailBarang = DetailBarang(
     nama = nama,
     kode = kode,
     jumlah = jumlah,
-    harga = harga
+    harga = harga,
+    tanggal = tanggal
 )

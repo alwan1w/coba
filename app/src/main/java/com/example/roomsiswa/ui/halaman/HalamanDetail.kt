@@ -47,8 +47,8 @@ import kotlinx.coroutines.launch
 object DetailsDestination : DestinasiNavigasi {
     override val route = "item_details"
     override val titleRes = R.string.detail_barang
-    const val siswaIdArg = "itemId"
-    val routeWithArgs = "$route/{$siswaIdArg}"
+    const val barangIdArg = "itemId"
+    val routeWithArgs = "$route/{$barangIdArg}"
 }
 
 @OptIn(ExperimentalMaterial3Api::class)
@@ -98,7 +98,7 @@ fun DetailsScreen(
                 .padding(innerPadding)
                 .verticalScroll(rememberScrollState()),
 
-        )
+            )
     }
 }
 
@@ -114,7 +114,7 @@ private fun ItemDetailsBody(
     ) {
         var deleteConfirmationRequired by rememberSaveable { mutableStateOf(false) }
         ItemDetails(
-           barang  = itemDetailsUiState.detailBarang.toBarang(), modifier = Modifier.fillMaxWidth()
+            barang  = itemDetailsUiState.detailBarang.toBarang(), modifier = Modifier.fillMaxWidth()
         )
 
         OutlinedButton(
@@ -154,6 +154,16 @@ fun ItemDetails(
                 .padding(dimensionResource(id = R.dimen.padding_medium)),
             verticalArrangement = Arrangement.spacedBy(dimensionResource(id = R.dimen.padding_medium))
         ) {
+            ItemDetailsRow(
+                labelResID = R.string.tanggal,
+                itemDetail = barang.tanggal,
+                modifier = Modifier.padding(
+                    horizontal = dimensionResource(
+                        id = R.dimen
+                            .padding_medium
+                    )
+                )
+            )
             ItemDetailsRow(
                 labelResID = R.string.nama,
                 itemDetail = barang.nama,

@@ -8,11 +8,13 @@ import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
+import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
+import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material.icons.filled.Phone
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -22,10 +24,14 @@ import androidx.compose.material3.Icon
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
+import androidx.compose.material3.TextField
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Brush
@@ -45,6 +51,7 @@ import com.example.roomsiswa.model.PenyediaViewModel
 import com.example.roomsiswa.navigasi.DestinasiNavigasi
 import com.example.roomsiswa.navigasi.BarangTopAppBar
 import com.example.roomsiswa.ui.theme.RoomSiswaTheme
+import kotlinx.coroutines.flow.MutableStateFlow
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
@@ -60,12 +67,19 @@ fun HomeScreen(
     viewModel: HomeViewModel = viewModel(factory = PenyediaViewModel.Factory)
 ) {
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
+    var searchQuery by remember { mutableStateOf("") }
 
     Scaffold(
         modifier = modifier
             .nestedScroll(scrollBehavior.nestedScrollConnection),
 
         topBar = {
+            Column(
+                modifier = Modifier
+                    .fillMaxWidth()
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+            ){
+            }
             BarangTopAppBar(
                 title = stringResource(DestinasiHome.titleRes),
                 canNavigateBack = false,
@@ -114,16 +128,34 @@ fun HomeScreen(
     }
 }
 
+@OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun BodyHome(
     itemBarang: List<Barang>,
     modifier: Modifier = Modifier,
     onBarangClick: (Int) -> Unit = {}
 ) {
+    var searchQuery by remember { mutableStateOf("") }
+    
     Column(
         horizontalAlignment = Alignment.CenterHorizontally,
         modifier = modifier
     ) {
+        TextField(
+            value = searchQuery,
+            onValueChange = {newQuery ->
+                searchQuery = newQuery
+        },
+            placeholder = {
+                Text(text = stringResource(R.string.search))
+            },
+            modifier = Modifier
+                .fillMaxWidth()
+                .padding(dimensionResource(id = R.dimen.padding_small))
+            )
+        
+        Spacer(modifier = Modifier.height(dimensionResource(id = R.dimen.padding_small)))
+        
         if (itemBarang.isEmpty()) {
             Text(
                 text = stringResource(R.string.deskripsi_no_item),
@@ -132,7 +164,7 @@ fun BodyHome(
             )
         } else {
             ListBarang(
-                itemBarang = itemBarang,
+                itemBarang = itemBarang.filter { it.nama.contains(searchQuery, ignoreCase = true) },
                 modifier = Modifier
                     .padding(horizontal = dimensionResource(id = R.dimen.padding_small)),
                 onItemClick = { onBarangClick(it.id) }
@@ -176,12 +208,13 @@ fun DataBarang(
                 modifier = Modifier.fillMaxWidth()
             ) {
                 Text(
-                    text = barang.nama,
-                    style = MaterialTheme.typography.titleLarge,
+                    text = barang.tanggal,
+                    style = MaterialTheme.typography.titleMedium
                 )
+
                 Spacer(Modifier.weight(1f))
                 Icon(
-                    imageVector = Icons.Default.Phone,
+                    imageVector = Icons.Default.MoreVert,
                     contentDescription = null,
                 )
                 Text(
@@ -189,6 +222,10 @@ fun DataBarang(
                     style = MaterialTheme.typography.titleMedium
                 )
             }
+            Text(
+                text = barang.nama,
+                style = MaterialTheme.typography.titleLarge,
+            )
             Text(
                 text = barang.jumlah,
                 style = MaterialTheme.typography.titleMedium

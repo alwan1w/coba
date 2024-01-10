@@ -46,7 +46,7 @@ fun BarangTopAppBar(
     canNavigateBack: Boolean,
     modifier: Modifier = Modifier,
     scrollBehavior: TopAppBarScrollBehavior? = null,
-    navigateUp: () -> Unit = {}
+    navigateUp: () -> Unit = {},
 ) {
     CenterAlignedTopAppBar(title = { Text(title) },
         modifier = modifier,
@@ -108,11 +108,11 @@ fun HostNavigasi(
 
         composable(
             DetailsDestination.routeWithArgs,
-            arguments = listOf(navArgument(DetailsDestination.siswaIdArg) {
+            arguments = listOf(navArgument(DetailsDestination.barangIdArg) {
                 type = NavType.IntType
             })
         ) { backStackEntry ->
-            val itemId = backStackEntry.arguments?.getInt(DetailsDestination.siswaIdArg)
+            val itemId = backStackEntry.arguments?.getInt(DetailsDestination.barangIdArg)
             itemId?.let {
                 DetailsScreen(
                     navigateBack = { navController.popBackStack() },

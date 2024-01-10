@@ -16,7 +16,7 @@ class DetailsViewModel(
     private val repositoriBarang: RepositoriBarang
 ) : ViewModel() {
 
-    private val barangId: Int = checkNotNull(savedStateHandle[DetailsDestination.siswaIdArg])
+    private val barangId: Int = checkNotNull(savedStateHandle[DetailsDestination.barangIdArg])
     val uiState: StateFlow<ItemDetailsUiState> =
         repositoriBarang.getBarangStream(barangId)
             .filterNotNull()

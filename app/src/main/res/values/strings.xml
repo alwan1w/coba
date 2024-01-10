@@ -1,17 +1,15 @@
 <resources>
     <string name="app_name">Data Barang</string>
     <string name="entry_data">Tambah Data</string>
-    <string name="deskripsi_no_item">Tidak ada data Barang. Tap + untuk menambah data</string>
+    <string name="deskripsi_no_item">Tolong isi Data Barang dulu ya Kak Pres + </string>
     <string name="nama">Nama Barang</string>
     <string name="kode">Kode Barang</string>
     <string name="jumlah">Jumlah Barang</string>
     <string name="harga">Harga Barang</string>
-    <string name="nama1">Nama Siswa  :</string>
-    <string name="alamat1">Alamat Siswa :</string>
-    <string name="telpon1">Telpon Siswa :</string>
-    <string name="required_field">* required fields</string>
+    <string name="required_field">* Wajib Isi Gan Senggol Bacok</string>
     <string name="btn_submit">Submit</string>
     <string name="detail_barang">Detail Barang</string>
+    <string name="tanggal">Tanggal Masuk</string>
     <string name="edit_barang">Edit Barang</string>
     <string name="back">Back</string>
     <string name="yes">Ya</string>
@@ -24,5 +22,6 @@
     <string name="username">Username</string>
     <string name="password">Password</string>
     <string name="login">Login</string>
+    <string name="search">Search</string>
 
 </resources>

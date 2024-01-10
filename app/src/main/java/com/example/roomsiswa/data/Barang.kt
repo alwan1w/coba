@@ -2,6 +2,7 @@ package com.example.roomsiswa.data
 
 import androidx.room.Entity
 import androidx.room.PrimaryKey
+import java.util.Date
 
 @Entity(tableName = "tblBarang")
 data class Barang(
@@ -11,4 +12,5 @@ data class Barang(
     val kode : String,
     val jumlah: String,
     val harga : String,
+    val tanggal :  String,
 )
