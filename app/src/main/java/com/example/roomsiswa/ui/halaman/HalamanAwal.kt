@@ -2,19 +2,24 @@ package com.example.roomsiswa.ui.halaman
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.Image
+import androidx.compose.foundation.background
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.padding
+import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.CardDefaults
+import androidx.compose.material3.Divider
 import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.OutlinedCard
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.draw.shadow
+import androidx.compose.ui.graphics.Brush
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.ContentScale
 import androidx.compose.ui.res.dimensionResource
@@ -37,7 +42,15 @@ fun HalamanAwal(
     onNextButtonClicked: () -> Unit)
 {
     val image = painterResource(id = R.drawable.inven)
-    Column (modifier = Modifier,
+    Column (modifier = Modifier
+            .background(
+            brush = Brush.verticalGradient(
+                colors = listOf(
+                    Color(0xFF3700B3),
+                    Color(0xFFBB86FC)
+                )
+            )
+            ),
         verticalArrangement = Arrangement.SpaceBetween){
         OutlinedCard (
             colors = CardDefaults.cardColors(
@@ -46,6 +59,7 @@ fun HalamanAwal(
             border = BorderStroke(1.dp, Color.Black), modifier = Modifier
                 .fillMaxWidth(0.95f)
                 .padding(vertical = 30.dp)
+                .shadow(16.dp, RoundedCornerShape(16.dp))
                 .align(Alignment.CenterHorizontally)
         ){
             Column (horizontalAlignment = Alignment.CenterHorizontally,
@@ -56,8 +70,13 @@ fun HalamanAwal(
                     contentDescription = null,
                     contentScale = ContentScale.Fit
                 )
+                Divider(
+                    modifier = Modifier.padding(vertical = 10.dp),
+                    color = Color(0xFF6200EE),
+                    thickness = 2.dp
+                )
                 Text(
-                    text = "My",
+                    text = "Selamat Datang",
                     color = Color.DarkGray,
                     fontFamily = FontFamily.Cursive,
                     fontSize = 35.sp,
@@ -65,12 +84,10 @@ fun HalamanAwal(
                         .align(Alignment.CenterHorizontally)
                 )
                 Text(
-                    text = "Inventory",
-                    color = Color.DarkGray,
-                    fontFamily = FontFamily.Cursive,
-                    fontStyle = FontStyle.Italic,
-                    fontSize = 60.sp,
-                    fontWeight = FontWeight.Bold
+                    text = "INVENTORYKU",
+                    fontSize = 24.sp,
+                    color = Color(0xFF6200EE),
+                    fontWeight = FontWeight.Bold,
                 )
             }
         }
@@ -81,7 +98,9 @@ fun HalamanAwal(
                 .weight(1f, false),
             horizontalArrangement = Arrangement.spacedBy(dimensionResource(R.dimen.padding_medium))
         ){
-            Button(modifier = Modifier.weight(1f),
+            Button(modifier = Modifier
+                .padding(100.dp)
+                .weight(1f),
                 onClick = onNextButtonClicked
             ) {
                 Text(stringResource(R.string.Next))

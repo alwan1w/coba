@@ -5,7 +5,7 @@ import androidx.lifecycle.ViewModel
 class AuthViewModel : ViewModel() {
     // Data pengguna (contoh sederhana)
     private val userCredentials = mapOf(
-        "user1" to "password1",
+        "1" to "1",
         "user2" to "password2"
         // Tambahkan data pengguna lainnya
     )

@@ -1,5 +1,6 @@
 package com.example.roomsiswa.ui.halaman
 
+import androidx.compose.foundation.background
 import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Arrangement
 import androidx.compose.foundation.layout.Column
@@ -27,18 +28,23 @@ import androidx.compose.runtime.collectAsState
 import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Brush
+import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.input.nestedscroll.nestedScroll
 import androidx.compose.ui.res.dimensionResource
 import androidx.compose.ui.res.stringResource
 import androidx.compose.ui.text.style.TextAlign
+import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
+import com.example.roomsiswa.Greeting
 import com.example.roomsiswa.R
 import com.example.roomsiswa.data.Barang
 import com.example.roomsiswa.model.HomeViewModel
 import com.example.roomsiswa.model.PenyediaViewModel
 import com.example.roomsiswa.navigasi.DestinasiNavigasi
 import com.example.roomsiswa.navigasi.BarangTopAppBar
+import com.example.roomsiswa.ui.theme.RoomSiswaTheme
 
 object DestinasiHome : DestinasiNavigasi {
     override val route = "home"
@@ -56,12 +62,24 @@ fun HomeScreen(
     val scrollBehavior = TopAppBarDefaults.enterAlwaysScrollBehavior()
 
     Scaffold(
-        modifier = modifier.nestedScroll(scrollBehavior.nestedScrollConnection),
+        modifier = modifier
+            .nestedScroll(scrollBehavior.nestedScrollConnection),
+
         topBar = {
             BarangTopAppBar(
                 title = stringResource(DestinasiHome.titleRes),
                 canNavigateBack = false,
-                scrollBehavior = scrollBehavior
+                scrollBehavior = scrollBehavior,
+                modifier = modifier
+                    .background(
+                        brush = Brush.verticalGradient(
+                            colors = listOf(
+                                Color(0xFF3700B3),
+                                Color(0xFFBB86FC)
+                            )
+                        )
+                    )
+
             )
         },
         floatingActionButton = {
@@ -81,6 +99,14 @@ fun HomeScreen(
         BodyHome(
             itemBarang = uiStateBarang.listBarang,
             modifier = Modifier
+                .background(
+                    brush = Brush.verticalGradient(
+                        colors = listOf(
+                            Color(0xFF3700B3),
+                            Color(0xFFBB86FC)
+                        )
+                    )
+                )
                 .padding(innerPadding)
                 .fillMaxSize(),
             onBarangClick = onDetailClick
@@ -126,7 +152,8 @@ fun ListBarang(
             DataBarang(
                 barang = person,
                 modifier = Modifier
-                    .padding(dimensionResource(id = R.dimen.padding_small)).clickable { onItemClick(person)  }
+                    .padding(dimensionResource(id = R.dimen.padding_small))
+                    .clickable { onItemClick(person) }
             )
         }
     }
@@ -173,3 +200,4 @@ fun DataBarang(
         }
     }
 }
+
